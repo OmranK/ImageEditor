@@ -102,7 +102,7 @@ By using the abstractions, we can create a composition that uses any implementat
 With this, we initialize any object that needs both a feed loading and image loading functionality objects composed like this:
 
 ```
-			feedLoader: FeedLoaderWithFallbackComposite(
+	    feedLoader: FeedLoaderWithFallbackComposite(
                 primary: FeedLoaderWithFallbackComposite(
                     primary: FeedLoaderCacheDecorator(
                         decoratee: remoteFeedLoader,
