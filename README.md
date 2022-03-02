@@ -36,7 +36,8 @@ I decided to create a modular application with multiple frameworks to demonstrat
 ---
 
 - `Presentation Layer` - platform agnostic framework that holds platform agnostic presentation logic - viewmodels and presenters. Created in a separate framework to allow multiple platforms to re-use the logic (macoS, iOS, iPadOS)
-	- The `FeedView` folder holds the presentation logic for the feed view.	- The `EditorView` folder holds the presentation logic for the image editor view.
+	- The `FeedView` folder holds the presentation logic for the feed view.	
+	- The `EditorView` folder holds the presentation logic for the image editor view.
 ---
 
 - `UI Layer` - iOS specific framework housing the UI elements for iOS (storyboards, and viewcontrollers)
