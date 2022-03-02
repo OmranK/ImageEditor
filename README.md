@@ -8,7 +8,7 @@
 
 # Engineering Process 
 
-###Identifying the Core Logic
+### Identifying the Core Logic
 
 In designing this application, there were 3 user experience curations I identified as the core logic or domain of the application.
 
@@ -16,9 +16,15 @@ In designing this application, there were 3 user experience curations I identifi
 - The image editor - Users must be able to edit any image from their feed.
 - Persistence - The user must be able to upload any changes they've made back to the server.
 
+### User Interface  
+
 I used two views in the UI - a feed view and an image editor view, built using the MVP pattern with adapters to facilitate indirect, unidirectional communication between the core layer and the UI.
 
-I decided to create a modular application with multiple frameworks to demonstrate the separation of the layers, especially the layer holding the core logic. All the frameworks are a part of the "ImageEditor" Xcode project.
+### Modularity with Frameworks
+
+I decided to create a modular application with multiple frameworks to demonstrate the separation of the layers, especially the layer holding the core logic. All the frameworks are a part of the "**ImageEditor**" Xcode project.
+
+---
 
 - `Core Layer` - platform agnostic framework that holds the core application logic and all of the essential implementations to facilitate that logic.
 	- The `Core Functionality` folder defines as structs and protocols, the behaviors and models needed by the rest of the application.
@@ -26,16 +32,23 @@ I decided to create a modular application with multiple frameworks to demonstrat
 	- The `API` folder holds all the objects responsible for networking. (URLSession)
 	- The `Cacheing` folder holds all the objects responsible for cacheing. (CoreData)
 	- The `Image Rendering` folder holds the objects that facilitate in the editing of images. (Core Image)
+
+---
+
 - `Presentation Layer` - platform agnostic framework that holds platform agnostic presentation logic - viewmodels and presenters. Created in a separate framework to allow multiple platforms to re-use the logic (macoS, iOS, iPadOS)
 	- The `FeedView` folder holds the presentation logic for the feed view.	- The `EditorView` folder holds the presentation logic for the image editor view.
+---
+
 - `UI Layer` - iOS specific framework housing the UI elements for iOS (storyboards, and viewcontrollers)
 	- The `Composition` folder holds the Composition logic for the views including the adapters for the MVP pattern, decorators for all objects dispatching any completed work to do so on the main queue, and proxies for separating the weak reference logic away from the presentation layer.
 	- The `Controllers` folder holds all the ViewControllers used.
 	- The `Views` folder holds all the view elements such as storyboards and tableview cells.
 
+---
+
 The `Presentation Layer` objects import the `Core Layer` and the `UI Layer` objects import either the `Core Layer`, the `Presentation Layer` or both. This demonstrates that dependencies flow outward and modularity is achieved. `Core Layer` components do not know about any implementation details.
 
-Finally everything is composed into an iOS application in a separate project which is created as an iOS App. The frameworks are brought in as dependencies and linked together in an Xcode workspace.
+Finally everything is composed into a working application in a separate project which is created as an iOS App. The frameworks are brought in as dependencies and linked together in an Xcode workspace.
 
 ![](README_IMAGES/framework_linking.png)
 
